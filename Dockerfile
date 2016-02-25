@@ -10,12 +10,16 @@ RUN zypper --no-gpg-checks refresh cmft
 # xorg-x11-fonts - apparently necessary to run jive
 # glibc-locale is necessary for the en_US locale setting (tangosys user needs it)
 
-RUN echo $(grep $(hostname) /etc/hosts | cut -f1) leap-control >> /etc/hosts && \
-    zypper install -y tango-db tango-test tango-java python-sardana vim \
+RUN zypper install -y tango-db tango-test tango-java python-sardana vim \
     xorg-x11-fonts glibc-locale
 
 ENV TERM=xterm
+
+# add USER ENV (necessary e.g. for spyderlib)
 ENV USER=root
 
+# define tango host env var (/etc/tangorc is created wrong during build)
+# a better solution may be http://stackoverflow.com/a/28922278 (but it didn't work)
+ENV TANGO_HOST=taurus-test:10000
 
 EXPOSE 10000
