@@ -20,6 +20,7 @@ ENV USER=root
 
 # define tango host env var (/etc/tangorc is created wrong during build)
 # a better solution may be http://stackoverflow.com/a/28922278 (but it didn't work)
-ENV TANGO_HOST=taurus-test:10000
+RUN echo 'TANGO_HOST=leap-control:10000' /etc/tangorc
+
 
 EXPOSE 10000
