@@ -5,9 +5,9 @@ Docker image configuration for a basic control system stack based on Sardana & T
 Run it in detached mode and later on execute bash in order to play with it.
 
 ~~~~
-docker run -d --name=leap-control -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+docker run -d -h leap-control --name=leap-control -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
            -e QT_X11_NO_MITSHM=1 -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
-           --cap-add=SYS_PTRACE reszelaz/leap-control
+           --cap-add=SYS_PTRACE ctgensoft/leap-control
 xhost +local:
 docker exec -it leap-control bash
 ~~~~
